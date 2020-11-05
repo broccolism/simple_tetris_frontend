@@ -1,0 +1,18 @@
+/*
+const tetriminoColor = [
+  "#ffffff",
+  "#4287f5",
+  "#4aff89",
+  "#f5b942",
+  "#f244b5",
+  "#fc3041",
+  "#80d44c",
+  "#8753db",
+];
+*/
+
+.background {
+  width: 10px;
+  height: 10px;
+  background: burlywood;
+}
