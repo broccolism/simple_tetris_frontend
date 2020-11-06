@@ -12,7 +12,30 @@ const tetriminoColor = [
 */
 
 .background {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   background: burlywood;
+  text-align: center;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
+  clear: both;
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+div {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
 }
