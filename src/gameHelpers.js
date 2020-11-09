@@ -13,7 +13,7 @@ export const isCollided = (player, stage, { x: moveX, y: moveY }) => {
       if (player.tetromino[y][x] !== 0) {
         const nextY = y + player.pos.y + moveY;
         const nextX = x + player.pos.x + moveX;
-        console.log(`y: ${nextY}, x: ${nextX}`);
+
         if (
           nextY >= STAGE_HEIGHT ||
           nextY < 0 ||
@@ -22,12 +22,11 @@ export const isCollided = (player, stage, { x: moveX, y: moveY }) => {
           (stage[nextY][nextX] !== undefined &&
             stage[nextY][nextX][1] !== "clear")
         ) {
-          console.log("FALSE");
           return true;
         }
       }
     }
   }
-  console.log("F");
+
   return false;
 };

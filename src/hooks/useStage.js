@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
-import { createStage } from "../gameHelpers";
+import { createStage, STAGE_WIDTH } from "../gameHelpers";
 
 export const useStage = (player, resetPlayer) => {
   const [stage, setStage] = useState(createStage());
+  const [rowsCleared, setRowsCleared] = useState(0);
 
   useEffect(() => {
+    setRowsCleared(0);
+
+    const sweepRows = (newState) =>
+      newState.reduce((acc, row) => {
+        if (row.findIndex((cell) => cell[0] === 0) === -1) {
+          setRowsCleared((prev) => prev + 1);
+          acc.unshift(new Array(STAGE_WIDTH).fill([0, "clear"]));
+          return acc;
+        }
+        acc.push(row);
+        return acc;
+      }, []);
+
     const updateStage = (prevStage) => {
       // First, flush the stage
       const newStage = prevStage.map((row) =>
@@ -26,6 +40,7 @@ export const useStage = (player, resetPlayer) => {
       // Then check if we collided
       if (player.collided) {
         resetPlayer();
+        return sweepRows(newStage);
       }
 
       return newStage;
@@ -34,5 +49,5 @@ export const useStage = (player, resetPlayer) => {
     setStage((prev) => updateStage(prev));
   }, [player, resetPlayer]);
 
-  return [stage, setStage];
+  return [stage, setStage, rowsCleared];
 };
