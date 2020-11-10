@@ -8,16 +8,16 @@ export const createStage = () =>
 
 export const isCollided = (player, stage, { x: moveX, y: moveY }) => {
   const tetriminoSize = player.tetromino.length;
-  for (let y = 0; y < tetriminoSize; y++) {
+  for (let y = 0; y < tetriminoSize; ++y) {
     for (let x = 0; x < tetriminoSize; ++x) {
       if (player.tetromino[y][x] !== 0) {
         const nextY = y + player.pos.y + moveY;
         const nextX = x + player.pos.x + moveX;
 
         if (
-          nextY >= STAGE_HEIGHT ||
+          nextY == STAGE_HEIGHT ||
           nextY < 0 ||
-          nextX >= STAGE_WIDTH ||
+          nextX == STAGE_WIDTH ||
           nextX < 0 ||
           (stage[nextY][nextX] !== undefined &&
             stage[nextY][nextX][1] !== "clear")
@@ -29,4 +29,23 @@ export const isCollided = (player, stage, { x: moveX, y: moveY }) => {
   }
 
   return false;
+};
+
+export const isValidMove = (player, { x: moveX, y: moveY }) => {
+  const tetriminoSize = player.tetromino.length;
+  for (let y = 0; y < tetriminoSize; ++y) {
+    for (let x = 0; x < tetriminoSize; ++x) {
+      if (player.tetromino[y][x] !== 0) {
+        const nextY = y + player.pos.y + moveY;
+        const nextX = x + player.pos.x + moveX;
+
+        if (nextX >= STAGE_WIDTH || nextY >= STAGE_HEIGHT) {
+          console.log("invalid");
+          return false;
+        }
+      }
+    }
+  }
+
+  return true;
 };

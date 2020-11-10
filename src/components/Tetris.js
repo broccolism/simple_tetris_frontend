@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   createStage,
   isCollided,
+  isValidMove,
   STAGE_HEIGHT,
   STAGE_WIDTH,
 } from "../gameHelpers";
@@ -68,24 +69,13 @@ const Tetris = () => {
     }
   };
 
-  const movePlayerBottom = () => {
-    const bottomIdx = checkBottomIdx(player.pos.x);
-    console.log(bottomIdx);
-    updatePlayerPos({
-      x: 0,
-      y: bottomIdx - player.pos.y,
-      collided: true,
-    });
-  };
-
-  const checkBottomIdx = () => {
-    let bottomDist = STAGE_HEIGHT - 1;
-
-    while (isCollided(player, stage, { x: 0, y: bottomDist })) {
-      --bottomDist;
+  const hardDropPlayer = () => {
+    let dist = 0;
+    while (!isCollided(player, stage, { x: 0, y: dist })) {
+      dist += 1;
     }
 
-    return bottomDist;
+    updatePlayerPos({ x: 0, y: dist - 1, collided: true });
   };
 
   const downKeyUp = ({ keyCode }) => {
@@ -105,7 +95,7 @@ const Tetris = () => {
     if (!gameOver) {
       switch (keyCode) {
         case 32: // space
-          movePlayerBottom();
+          hardDropPlayer();
           break;
         case 37: // left
           movePlayerHorizontal(-1);
