@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
-import {
-  createStage,
-  isCollided,
-  isValidMove,
-  STAGE_HEIGHT,
-  STAGE_WIDTH,
-} from "../gameHelpers";
+import { createStage, isCollided } from "../gameHelpers";
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";

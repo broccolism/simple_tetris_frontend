@@ -30,22 +30,3 @@ export const isCollided = (player, stage, { x: moveX, y: moveY }) => {
 
   return false;
 };
-
-export const isValidMove = (player, { x: moveX, y: moveY }) => {
-  const tetriminoSize = player.tetromino.length;
-  for (let y = 0; y < tetriminoSize; ++y) {
-    for (let x = 0; x < tetriminoSize; ++x) {
-      if (player.tetromino[y][x] !== 0) {
-        const nextY = y + player.pos.y + moveY;
-        const nextX = x + player.pos.x + moveX;
-
-        if (nextX >= STAGE_WIDTH || nextY >= STAGE_HEIGHT) {
-          console.log("invalid");
-          return false;
-        }
-      }
-    }
-  }
-
-  return true;
-};
